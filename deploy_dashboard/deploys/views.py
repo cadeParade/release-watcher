@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
+from django.http import HttpResponse
 import datetime
 import requests
 import json
@@ -11,6 +12,8 @@ def home(req):
 
   if(str(req.user) == "AnonymousUser"):
     return render(req, 'deploys/login.html')
+  if not user_is_member_of_altschool(req.user):
+    return HttpResponse("You are not a member of Altschool. Go away.")
 
   next_release = determine_next_release()
   master_in_acceptance_for_release = is_master_in_acceptance_for_release(req, next_release)
@@ -104,3 +107,14 @@ def release(req, release_version):
     'soak_in_production_for_release': soak_in_production_for_release
   }
   return render(req, 'deploys/dashboard.html', context)
+
+def user_is_member_of_altschool(user):
+    url = 'https://api.github.com/user/memberships/orgs?access_token=%s' % user.social_auth.filter(provider='github')[0].access_token
+    r = requests.get(url)
+    if(r.ok):
+      orgs = r.json()
+      org_names = [org['organization']['login'] for org in orgs]
+      if 'AltSchool' in org_names:
+        return True
+    return False
+
