@@ -79,3 +79,28 @@ def latest_merges_for_branches(req, head_branch_name, base_branch_name, num_resu
     return prs
   else:
     print 'NOT OK'
+
+def release(req, release_version):
+  if(str(req.user) == "AnonymousUser"):
+    return render(req, 'deploys/login.html')
+
+  # next_release = determine_next_release()
+  release = Release.objects.get(version=release_version)
+  master_in_acceptance_for_release = is_master_in_acceptance_for_release(req, release)
+  soak_in_production_for_release = is_production_deployed(req, release)
+
+
+  master_to_acceptance = latest_merges_for_branches(req, 'master', 'acceptance')
+  acceptance_to_soak = latest_merges_for_branches(req, 'acceptance', 'soak')
+  soak_to_production = latest_merges_for_branches(req, 'soak', 'production')
+  acceptance_to_master = latest_merges_for_branches(req, 'acceptance', 'master')
+  context = {
+    'master_to_acceptance': master_to_acceptance,
+    'acceptance_to_soak': acceptance_to_soak,
+    'soak_to_production': soak_to_production,
+    'acceptance_to_master': acceptance_to_master,
+    'release': release,
+    'master_in_acceptance_for_release': master_in_acceptance_for_release,
+    'soak_in_production_for_release': soak_in_production_for_release
+  }
+  return render(req, 'deploys/dashboard.html', context)

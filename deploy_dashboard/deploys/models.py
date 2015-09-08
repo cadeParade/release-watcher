@@ -5,3 +5,6 @@ class Release(models.Model):
     code_freeze_date = models.DateTimeField()
     production_release_date = models.DateTimeField()
     release_manager = models.CharField(max_length=200)
+
+    def __unicode__(self):
+      return "Release %s" % self.version
