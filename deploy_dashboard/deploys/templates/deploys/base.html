@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deploy Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'deploys/style.css' %}" />
+</head>
+<body>
+  <nav class="navbar navbar-inverse blue-navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand white-fg" href="#">
+          Release Dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}(no content){% endblock %}
+  </div>
+</body>
+</html>

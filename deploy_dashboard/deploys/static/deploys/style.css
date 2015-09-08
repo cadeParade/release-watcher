@@ -1,0 +1,12 @@
+h1 {
+  color:red;
+}
+
+.blue-navbar {
+  background-color: #2aaadd;
+  border: 0;
+}
+
+.navbar-brand.white-fg {
+  color: white;
+}

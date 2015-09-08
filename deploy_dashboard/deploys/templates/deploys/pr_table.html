@@ -1,0 +1,14 @@
+{% load template_helpers %}
+
+<table class="table">
+  {% for pr in prs %}
+    <tr>
+      <td>
+        <a href="{{pr.html_url}}">{{ pr.title}}</a>
+      </td>
+      <td>
+        {{pr.merged_at|format_time}}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
