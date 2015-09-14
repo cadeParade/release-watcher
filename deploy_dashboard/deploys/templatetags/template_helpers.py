@@ -6,6 +6,8 @@ register = template.Library()
 
 @register.filter
 def format_time(var):
+  if not var:
+    return "idk?"
   dt_no_tz = datetime.strptime(var, "%Y-%m-%dT%H:%M:%SZ")
   dt_utc = dt_no_tz.replace(tzinfo=pytz.timezone('UTC'))
   dt_pt = dt_utc.astimezone(pytz.timezone('US/Pacific'))
