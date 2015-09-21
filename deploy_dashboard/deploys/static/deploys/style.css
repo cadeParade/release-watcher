@@ -7,6 +7,6 @@ h1 {
   border: 0;
 }
 
-.navbar-brand.white-fg {
+.navbar .white-fg, .navbar .navbar-nav>li>a {
   color: white;
 }
