@@ -18,8 +18,9 @@ from django.contrib import admin
 from deploys import views
 
 urlpatterns = [
-    url(r'^$', views.home),
+    url(r'^$', views.home, name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^releases/(.*)$', views.release)
+    url(r'^releases/$', views.releases, name='all-releases'),
+    url(r'^releases/(.*)$', views.release, name='single-release')
 ]

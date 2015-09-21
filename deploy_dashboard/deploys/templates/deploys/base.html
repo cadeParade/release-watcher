@@ -12,14 +12,14 @@
   <nav class="navbar navbar-inverse blue-navbar">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand white-fg" href="#">
+        <a class="navbar-brand white-fg" href="{% url 'home' %}">
           Release Dashboard
         </a>
       </div>
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="#" class="white-fg">Releases</a></li>
+          <li><a href="{% url 'all-releases' %}" class="white-fg">Releases</a></li>
           <li><a href="{% url 'admin:index' %}" class="white-fg">Admin</a></li>
     </div>
   </nav>

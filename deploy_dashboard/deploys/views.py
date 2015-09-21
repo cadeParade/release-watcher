@@ -7,7 +7,6 @@ import json
 from .models import Release
 import pytz
 
-# Create your views here.
 def home(req):
 
   if(str(req.user) == "AnonymousUser"):
@@ -33,7 +32,6 @@ def is_master_in_acceptance_for_release(req, release):
     dt_utc = dt_no_tz.replace(tzinfo=pytz.timezone('UTC'))
     dt_pt = dt_utc.astimezone(pytz.timezone('US/Pacific'))
     if dt_pt > release.code_freeze_date and dt_pt < release.production_release_date:
-      print 'in if'
       return "Yes"
   return "No"
 
@@ -45,7 +43,6 @@ def is_production_deployed(req, release):
     dt_utc = dt_no_tz.replace(tzinfo=pytz.timezone('UTC'))
     dt_pt = dt_utc.astimezone(pytz.timezone('US/Pacific'))
     if dt_pt > release.code_freeze_date and dt_pt < release.production_release_date + datetime.timedelta(days=2):
-      print 'in if'
       return "Yes"
   return "No"
 
@@ -64,6 +61,10 @@ def latest_merges_for_branches(req, head_branch_name, base_branch_name, num_resu
     return prs
   else:
     print 'NOT OK'
+
+def releases(req):
+  releases = Release.objects.order_by('-production_release_date').all()
+  return render(req, 'deploys/releases.html', {'releases': releases})
 
 def release(req, release_version):
   if(str(req.user) == "AnonymousUser"):
