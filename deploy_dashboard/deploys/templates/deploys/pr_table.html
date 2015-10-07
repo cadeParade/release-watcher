@@ -1,12 +1,12 @@
 {% load template_helpers %}
 
-<table class="table table-separate">
+<table class="table">
   {% for pr in prs %}
-    <tr class="flexrow">
-      <td class="col-xs-8">
-        <a href="{{pr.html_url}}">{{pr.title}}</a>
+    <tr>
+      <td>
+        <a href="{{pr.html_url}}">{{ pr.title}}</a>
       </td>
-      <td class="col-xs-4">
+      <td>
         {{pr.merged_at|format_time}}
       </td>
     </tr>
