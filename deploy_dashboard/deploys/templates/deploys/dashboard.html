@@ -1,5 +1,6 @@
 {% extends 'deploys/base.html' %}
 {% load template_helpers %}
+{% load markdown_filter %}
 
 {% block content %}
 
@@ -11,7 +12,10 @@
   <h2>Production release date: {{release.production_release_date}}</h2>
   <h3>Has master been merged to acceptance? {{master_in_acceptance_for_release}}</h3>
   <h3>Is production deployed? {{soak_in_production_for_release}}</h3>
-  
+  <div class='well'>
+    <h3>Additional Information:</h3>
+    {{ release.extra_detail | markdownify | safe }}
+  </div>
   <br><br>
   <h2>History:</h2>
   <h3>Latest PRs from master to acceptance</h3>
