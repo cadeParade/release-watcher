@@ -9,21 +9,15 @@
   <link rel="stylesheet" type="text/css" href="{% static 'deploys/style.css' %}" />
 </head>
 <body>
-  <nav class="navbar navbar-inverse blue-navbar">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand white-fg" href="{% url 'home' %}">
-          Release Dashboard
-        </a>
-      </div>
+  <div class="flexrow fg-white bg-blue">
+    <nav class="TabNav TabNav--header">
+      <a href="{% url 'home' %}" class="TabNav-item">Release Dashboard</a>
+      <a href="{% url 'all-releases' %}" class="TabNav-item">Releases</a>
+      <a href="{% url 'admin:index' %}" class="TabNav-item">Admin</a>
+    </nav>
+  </div>
 
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="{% url 'all-releases' %}" class="white-fg">Releases</a></li>
-          <li><a href="{% url 'admin:index' %}" class="white-fg">Admin</a></li>
-    </div>
-  </nav>
-  <div class="container">
+  <div class="container pad-xs-spacious">
     {% block content %}(no content){% endblock %}
   </div>
 </body>

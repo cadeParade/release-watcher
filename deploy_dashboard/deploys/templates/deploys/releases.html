@@ -1,0 +1,21 @@
+{% extends 'deploys/base.html' %}
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Version</td>
+        <td>Release date</td>
+        <td>Wrangler</td>
+      </tr>
+    </thead>
+    {% for release in releases %}
+        <tr>
+        <td><a href="{% url 'single-release' release.version %}">{{release.version}}</td>
+        <td>{{release.production_release_date}}</td>
+        <td>{{release.release_manager}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+
+{% endblock %}
